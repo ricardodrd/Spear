@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <title>Data chart</title>
+  <meta charset="UTF-8">
+      <link rel="stylesheet" href="css/style.css">
+
+
+<body>
+<head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Para el DATA RANGE -->
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+  </head>
+  <body>
+    <body>
+<!-- MENU -->
+<div class="menu">
+	<i class="fa fa-bars fa-3x"></i>
+</div>
+<div id="toolbar">
+	<div class="wrapper">
+		<div class="tool">
+			<i class="fa fa-cog top fa-2x"></i>
+			<a href="#" class="title">Menu</a>
+		</div>
+				<div class="first">
+			<ul>
+				 <li><!--ELEGIR RANGO DE FECHAS -->
+            <div class="tool-add-image">
+              <i class="fa fa-calendar"></i>
+              <a href="#">Date</a>
+            <input type="text" id="datepicker" name="daterange" value="01/01/2018 - 01/15/2018" />
+            </div>
+				</li>
+				<li><!--SLIDER PARA LA EFICIENCIA -->
+            <div class="tool-change-background">
+              <i class="fa fa-recycle"></i>
+              <a href="">Efficiency</a></div><p id="ef"><span id="demo"></span> %</p>
+              <div class="slidecontainer">
+              <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
+            <script>
+            var slider = document.getElementById("myRange");
+            var output = document.getElementById("demo");
+            output.innerHTML = slider.value;
+
+            slider.oninput = function() {
+              output.innerHTML = this.value;
+            }
+            </script>
+            </div>
+				</li>
+        	<li><!-- ESTADO DE DISPOSITIVOS -->
+            <div class="tool-change-background">
+              <i class="fa fa-plus"></i>
+              <a href="" onclick="return false;" class="new-card">Status</a>
+            </div>
+				</li>
+          <li><!-- CONSUMO ENERGETICO -->
+            <div class="tool-change-background">
+              <i class="fa fa-battery-half fa-1x"></i>
+              <a href="" onclick="return false;" class="new-card">Energy cosumption</a>
+            </div>
+				</li>
+        <li><!-- ELEGIR AREA -->
+          <div class="tool-change-background">
+            <i class="fa fa-home"></i>
+            <a href="" onclick="return false;" class="new-card">Area</a>
+            <select>
+			<option value="alti">Loft</option>
+            <option value="sala">Room</option>
+            <option value="ae">Electr Cupboard</option>
+            <option value="coc">Kitchen</option>
+          </select>
+          </div>
+      </li>
+			</ul>
+		</div>
+  </div>
+</div>
+
+
+  <!-- PARA DATA RANGE -->
+      <script>
+      $(function() {
+      $('input[name="daterange"]').daterangepicker({
+        opens: 'left'
+      }, function(start, end, label) {
+        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+      });
+      });
+      </script>
+
+    <header id="hea">
+      <nav>
+        <ul><!--LIST ELEMENTS OF THE HEADER-->
+          <li><div class="thread" onclick="window.location='index.html';">Habitaciones</div></li>
+          <li><div class="thread" onclick="window.location.reload()">Sala</div></li>
+          <li><div class="thread" onclick="window.location='index_otros.html';">Otros</div></li>
+        </ul>
+      </nav>
+  </header>
+
+
+    <h2>Armario Eléctrico</h2>
+    <div id="chart3" class="chart"></div>
+  
+
+</body>
+
+    <script  src="js/armario.js"></script>
+
+</body>
+
+</html>
