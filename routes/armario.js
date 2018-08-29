@@ -8,7 +8,7 @@ router.get('/', function (req, res){
   var recordset = 'SELECT * FROM mediciones';
   //dbpool.query(recordset, function(err,recordset){
     console.log("Connected...");
-    res.render('altillo.ejs',{
+    res.render('armario.ejs',{
     //  news: recordset[0].value;
     title: "sd"
     })

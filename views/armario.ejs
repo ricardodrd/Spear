@@ -4,15 +4,9 @@
 <head>
   <title>Data chart</title>
   <meta charset="UTF-8">
-      <link rel="stylesheet" href="css/style.css">
-
-
-<body>
-<head>
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../stylesheets/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Para el DATA RANGE -->
       <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
       <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -20,7 +14,6 @@
       <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   </head>
   <body>
-    <body>
 <!-- MENU -->
 <div class="menu">
 	<i class="fa fa-bars fa-3x"></i>
@@ -101,9 +94,10 @@
     <header id="hea">
       <nav>
         <ul><!--LIST ELEMENTS OF THE HEADER-->
-          <li><div class="thread" onclick="window.location='index.html';">Habitaciones</div></li>
-          <li><div class="thread" onclick="window.location.reload()">Sala</div></li>
-          <li><div class="thread" onclick="window.location='index_otros.html';">Otros</div></li>
+          <li><div class="thread" onclick="window.location.reload()">Armario</div></li>
+          <li><div class="thread" onclick="window.location='/sala';">Sala</div></li>
+          <li><div class="thread" onclick="window.location='/cocina';">Cocina</div></li>
+          <li><div class="thread" onclick="window.location='/altillo';">Altillo</div></li>
         </ul>
       </nav>
   </header>
@@ -111,12 +105,11 @@
 
     <h2>Armario Eléctrico</h2>
     <div id="chart3" class="chart"></div>
-  
+
 
 </body>
 
-    <script  src="js/armario.js"></script>
+    <script  src="../../javascripts/armario.js"></script>
 
-</body>
 
 </html>

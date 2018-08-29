@@ -5,42 +5,30 @@ var path = require('path');
 //var logger = require('morgan');
 //var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-
-
-
-// var cocina = require('./routes/cocina');
-// var sala = require('./routes/sala');
-// var altillo = require('./routes/altillo');
-// var armario = require('./routes/armario');
-
-
-var routes = require('./routes/index.js');
-//var users = require('./routes/users');
-
+//Config
 var app = express();
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 //app.use(favicon(__dirname + '/public/favicon.ico'));
-
 //app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 //app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
-
+//routes
+var cocina = require('./routes/cocina');
+var sala = require('./routes/sala');
+var altillo = require('./routes/altillo');
+var armario = require('./routes/armario');
+var routes = require('./routes/index.js');
+//var users = require('./routes/users');
 app.use('/', routes);
-
-//app.use('/users', users);
-// app.use('/cocina', cocina);
-// app.use('/sala', sala);
-// app.use('/altillo', altillo);
-// app.use('/armario', armario);
+// app.use('/users', users);
+app.use('/cocina', cocina);
+app.use('/sala', sala);
+app.use('/altillo', altillo);
+app.use('/armario', armario);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

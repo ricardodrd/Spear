@@ -3,14 +3,14 @@
 
 <head>
   <meta charset="UTF-8">
-
-
-
-  <html>
-  <head>
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../stylesheets/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Para el DATA RANGE -->
+          <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+          <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+          <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   </head>
   <body>
   <!-- MENU -->
@@ -93,9 +93,11 @@
     <header id="hea">
       <nav>
         <ul><!--LIST ELEMENTS OF THE HEADER-->
-          <li><div class="thread" onclick="window.location='index.html';">Habitaciones</div></li>
+          <li><div class="thread" onclick="window.location='/armario';">Armario</div></li>
           <li><div class="thread" onclick="window.location.reload()">Sala</div></li>
-          <li><div class="thread" onclick="window.location='index_otros.html';">Otros</div></li>
+          <li><div class="thread" onclick="window.location='/cocina';">Cocina</div></li>
+          <li><div class="thread" onclick="window.location='/altillo';">Altillo</div></li>
+
         </ul>
       </nav>
   </header>
@@ -111,7 +113,7 @@
 </html>
 
 
-    <script  src="js/index_sala.js"></script>
+    <script  src="../../javascripts/sala.js"></script>
 
 
 
