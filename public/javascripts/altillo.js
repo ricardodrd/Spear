@@ -1,3 +1,4 @@
+
 var wh = [
   {
     name: "never alta n2",
@@ -289,22 +290,22 @@ var yScale = d3.scaleLinear()
 var nyScale =  d3.scaleLinear()
   .domain([0, d3.max(signal[0].values, d => d.value)])
   .range([height-margin, 0]);
-  
-  
+
+
 /* ALTILLO SVG */
 var svg = d3.select("#chart").append("svg")
   .attr("width", (width+margin)+"px")
   .attr("height", (height+margin)+"px")
   .append('g')
   .attr("transform", `translate(${mar2},20)`);
-  
-  
+
+
   /*
 ---------------------------
           EJES
 ---------------------------
 */
-  
+
 /*ALTILLO*/
 var line = d3.line()
   .x(d => xScale(d.date))
@@ -312,13 +313,13 @@ var line = d3.line()
 var line2 =d3.line()
   .x(d=>xScale(d.date))
   .y(d=> nyScale(d.value))
-  
-  
-  
+
+
+
 let lines = svg.append('g')
   .attr('class', 'lines');
-  
-  
+
+
 var color = d3.scaleOrdinal(d3.schemeCategory10);
 
 /*
@@ -354,7 +355,7 @@ lines.selectAll('.line-group2')
                   GROUP1 SELECT
 -------------------------------------------------------------------------------------------------
 */
-	
+
 	    /*ALTILLO*/
 lines.selectAll('.line-group')
   .data(wh).enter()
@@ -397,9 +398,9 @@ lines.selectAll('.line-group')
         .style("stroke-width", lineStroke)
         .style("cursor", "none");
   });
-  
-  
-  
+
+
+
 /*
 -------------------------------------------------------------------------------------------------------
               CIRCLES
@@ -447,7 +448,7 @@ lines.selectAll("circle-group")
           .duration(duration)
           .attr("r", circleRadius);
       });
-	  
+
 var xAxis = d3.axisBottom(xScale).ticks(24);
 var yAxis = d3.axisLeft(yScale).ticks(25);
 var nyAxis =d3.axisRight(nyScale).ticks(8);
@@ -476,8 +477,8 @@ svg.append("g")
     .attr("fill", "#000")
     .text("Mediciones")
     .attr("transform","translate(-15,-25)");
-	
-	
+
+
           /*
 ----------------------------------------
         Mouseover animation
@@ -504,10 +505,10 @@ function mouseout() {
 
 var z = d3.scaleOrdinal()
 	.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
-	
-	
-	
-	
+
+
+
+
 	/*
 --------------------------------------------------------------------------------
                             LEGEND
@@ -522,8 +523,8 @@ var legend1 = svg.append("g")
       .data(wh)
         .enter().append("g")
         .attr("transform", function(d, i) { return "translate(60," + i * 26 + ")"; });
-		
-		
+
+
  legend1.append("rect")
       .attr("x", width - 20)
       .attr("width", 20)

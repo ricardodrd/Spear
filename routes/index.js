@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 var knex = require("../server/dbConnection.js");
 /*Home page*/
+
 router.get('/', function (req, res){
   //dbpool.query(recordset, function(err,recordset){
     console.log("Connected...");
@@ -17,4 +18,6 @@ router.get('/', function (req, res){
 
 //  })
 })
+
+
 module.exports = router;

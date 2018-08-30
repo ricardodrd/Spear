@@ -23,6 +23,10 @@ var altillo = require('./routes/altillo');
 var armario = require('./routes/armario');
 var routes = require('./routes/index.js');
 //var users = require('./routes/users');
+app.use('/', function(req, res, next){
+  console.log("query information");
+  next();
+})
 app.use('/', routes);
 // app.use('/users', users);
 app.use('/cocina', cocina);
