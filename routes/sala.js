@@ -13,8 +13,8 @@ router.get('/', queryDB, function (req, res){
       title: "sd",
       data: res.dbdata
     })
-    console.log(res.dbdata);
-}, createGraph)
+    // console.log(res.dbdata);
+});
 
 function queryDB(res, req, next){
   knex.select('sensorid', 'value').from('mediciones').then((resultset)=>{
@@ -24,16 +24,10 @@ function queryDB(res, req, next){
   })
 }
 //ejs needs to be fetched before using D3 json
-var margin = {top: 20, right: 20, bottom: 70, left: 40},
-    width = 600 - margin.left - margin.right,
-    height = 300 - margin.top - margin.bottom;
-
-
-// set the ranges
-
 
 function createGraph (res, req, next){
   console.log(req.dbdata);
+/*
   var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
 
   var y = d3.scale.linear().range([height, 0]);
@@ -98,6 +92,6 @@ svg.selectAll("bar")
     .attr("width", x.rangeBand())
     .attr("y", function(d) { return y(d.value); })
     .attr("height", function(d) { return height - y(d.value); });
-
+*/
 }
 module.exports = router;
