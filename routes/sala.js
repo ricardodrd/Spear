@@ -7,13 +7,18 @@ var knex = require("../server/dbConnection.js");
 /*Home page*/
 router.get('/', queryDB, function (req, res){
   //dbpool.query(recordset, function(err,recordset){
-    console.log("Connected...");
-    res.render('sala.ejs',{
+  const d = new Date();
+  const h = d.getHours();
+  const m = d.getMinutes();
+  const s = d.getSeconds();
+  const t = `${h}:${m}:${s}`;
+  console.log("Connected...");
+  res.render('sala.ejs',{
     //  news: recordset[0].value;
-      title: "sd",
-      data: res.dbdata
-    })
-    // console.log(res.dbdata);
+    title: "sala",
+    data: res.dbdata,
+    time: t
+  })
 });
 
 function queryDB(res, req, next){
