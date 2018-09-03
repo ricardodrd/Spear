@@ -454,19 +454,19 @@ var yScale_cocina= d3.scaleLinear()
 var nyScale_cocina =  d3.scaleLinear()
   .domain([0, d3.max(signal_cocina[1].values, d => d.value)])
   .range([height-margin, 0])
-  
-  
-  
+
+
+
 /* COCINA SVG */
 var chart_cocina = d3.select("#chart2").append("svg")
   .attr("width", (width+margin)+"px")
   .attr("height", (height+margin)+"px")
   .append('g')
   .attr("transform", `translate(${mar2}, ${mar2})`);
-  
-  
-  
-  
+
+
+
+
 /*
 ---------------------------
           EJES
@@ -479,15 +479,15 @@ var line3=d3.line()
 var line4=  d3.line()
   .x(d=>xScale(d.date))
   .y(d=> nyScale_cocina(d.value))
-  
-  
+
+
 
 let lines2 = chart_cocina.append('g')
   .attr('class', 'lines');
-  
+
  var color = d3.scaleOrdinal(d3.schemeCategory10);
 
-  
+
   /*
 -------------------------------------------
             GROUP 2 SELECT
@@ -519,15 +519,15 @@ lines2.selectAll('.line-group3')
     .style('stroke', (d, i) => color(i-2))
     .style('opacity', lineOpacity)
     .style('fill',(d, i) => color(i-2));
-	
-	
+
+
 /*
 --------------------------------------------------------------------
                   GROUP1 SELECT
 --------------------------------------------------------------------
 */
-	
-	
+
+
 	/*COCINA*/
 lines2.selectAll('.line-group5')
   .data(wh_cocina).enter()
@@ -570,8 +570,8 @@ lines2.selectAll('.line-group5')
         .style("stroke-width", lineStroke)
         .style("cursor", "none");
     });
-		
-		
+
+
 /*
 -------------------------------------------------------------------------------------------------------
               CIRCLES
@@ -621,13 +621,17 @@ lines2.selectAll("circle-group")
             .duration(duration)
             .attr("r", circleRadius);
       });
-			
+
 var xAxis = d3.axisBottom(xScale).ticks(24);
 var yAxis_cocina = d3.axisLeft(yScale_cocina).ticks(25);
 var nyAxis_cocina= d3.axisRight(nyScale_cocina).ticks(15);
 
 
-
+/*
+------------------------------
+EJES
+------------------------------
+*/
 
 
 chart_cocina.append("g")
@@ -652,10 +656,10 @@ chart_cocina.append("g")
     .attr("fill", "#000")
     .text("Mediciones")
     .attr("transform","translate(-10,-25)");
-	
-	
-	
-	
+
+
+
+
           /*
 ----------------------------------------
         Mouseover animation
@@ -689,7 +693,7 @@ var legend2 = chart_cocina.append("g")
       .data(wh_cocina)
         .enter().append("g")
         .attr("transform", function(d, i) { return "translate(60," + i * 26 + ")"; });
-		
+
 legend2.append("rect")
      .attr("x", width - 20)
      .attr("width", 20)

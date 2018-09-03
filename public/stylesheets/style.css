@@ -16,17 +16,19 @@ svg {
 .graphs{
 }
 .chart{
-  border: 1px solid #F5F5F1;
+  border: 1px solid #D5D5D5;
   box-shadow: 5px 2px 2px #F0F0F0;
-  width: 92%;
+  width: 85%;
   text-align: center;
   margin: auto;
   margin-bottom: 10px;
   margin-top: 30px;
-  margin-left: 6%;
+  margin-left: 13%;
   background: white;
 }
-
+.charto{
+  height: 1000px;
+}
 
 h2{
   margin-left: 15px;
@@ -52,7 +54,7 @@ h4{
 
 #toolbar{
   /* float: right !important; */
-  width: 240px;
+  width: 12%;
   height: 100%;
   background-color: #2F3333;
   display: block;
@@ -65,7 +67,8 @@ left:0;
 #toolbar .wrapper .first{
   width: 100%;
   background-color: #3F4545;
-  margin: 0 auto;
+  padding-bottom: 0px;
+  margin: 0;
 }
 /* #toolbar .wrapper  h2{
 	color: #FDFCEC;
@@ -75,14 +78,18 @@ left:0;
 } */
 #toolbar .wrapper .first ul{
   padding: 0px;
-  border-bottom: 1px solid white;
-  border-top: 1px solid white;
 
 }
 .tool{
   background-color: #2F3333 ;
   padding-top: 10px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
+
+}
+.cfg{
+  padding-top: 50px;
+  padding-bottom: 10px;
+  background-color: #2F3333 ;
 
 }
 #toolbar .wrapper .first ul li{
@@ -103,7 +110,7 @@ left:0;
   display: inline-block;
 }
 #toolbar .wrapper .title{
-  font-size: 25px;
+  font-size: 23px;
 
 }
 .fa-cog.top{
@@ -145,6 +152,7 @@ i{
   padding-top: 10px;
     width: 60%;
     padding-bottom: 5px;
+    margin-left: 30px;
 }
 
 .slider {
@@ -213,7 +221,7 @@ color:#ddd3d3:
   /* width: 20%; */
   /* margin:0; */
   /* padding: 0; */
-  padding-left: 25%;
+text-align: center;
 }
 
 
@@ -239,11 +247,9 @@ img{
 }
 
 
-
-
-
 header {
-	background:linear-gradient(60deg,#0E526E,#116689,#13759D ,#2081AA,#1E8EBC);
+	background:linear-gradient(60deg,#3F4545,#5A6161,#777B7B ,#8E9292,#A3AAAA);
+
   color:white;
   padding-left:0px;
   box-shadow: 1px 0px 4px #212424;
@@ -291,7 +297,9 @@ nav li {
   top:0;
   right:0;
   margin-right: 20px;
-  margin-top: 2px;
+  margin-top: 4px;
+  color: #004A68;
+  font-weight: bold;
 }
 li .thread{
   color: white;
