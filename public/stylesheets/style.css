@@ -6,9 +6,8 @@ body{
 svg {
     font-family: Sans-Serif, Arial;
     width: 90%;
-    margin-top: 10px;
+    margin-top: 20px;
     padding-top: 20px;
-
 }
 .line {
   stroke-width: 2;
@@ -23,14 +22,15 @@ svg {
   text-align: center;
   margin: auto;
   margin-bottom: 10px;
-  margin-top: 25px;
-  margin-left: 7%;
+  margin-top: 30px;
+  margin-left: 6%;
   background: white;
 }
 
 
 h2{
   margin-left: 15px;
+  color: #4D4D4D;
 }
 h4{
   margin-left: 30px;
@@ -211,7 +211,7 @@ color:#ddd3d3:
 
 #sticky{
   /* float: right !important; */
-  width: 70px;
+  width: 60px;
   height: 100%;
   background:linear-gradient(60deg,#0E526E,#116689,#13759D ,#2081AA,#1E8EBC);
   display: inline-block;
@@ -225,7 +225,9 @@ color:#ddd3d3:
 
 
 
-
+img{
+  cursor: pointer;
+}
 
 
 
@@ -235,6 +237,8 @@ header {
 	background:linear-gradient(60deg,#0E526E,#116689,#13759D ,#2081AA,#1E8EBC);
   color:white;
   padding-left:0px;
+  box-shadow: 1px 0px 4px #212424;
+
 }
 
 header::after {
@@ -258,16 +262,17 @@ nav {
 nav ul {
   margin: 0;
   padding: 0;
-  list-style: none;
+
 }
 
 nav li {
-  display: inline-block;
-  padding-left:30px;
-  padding-right:30px;
-  padding-top: 10px;
-  padding-bottom:6px;
+  display: block;
+  padding-left:5px;
+  padding-right:20px;
+  padding-top: 20px;
+  padding-bottom:10px;
   position: relative;
+  cursor:pointer;
 
 }
 .time{
@@ -281,10 +286,11 @@ nav li {
 }
 li .thread{
   color: white;
-  text-decoration: none;
-  text-transform: uppercase;
+  text-align: center;
   font-size: 14px;
-  cursor:pointer;
+}
+.this{
+  background-color: #1D2C4F;
 }
 li a:before{
 	  text-decoration: none;

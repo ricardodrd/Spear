@@ -3,56 +3,30 @@
 
 <head>
   <meta charset="UTF-8">
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <link rel="stylesheet" href="../../stylesheets/style.css">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <link rel="stylesheet" href="../../stylesheets/style.css">
       <!-- Para el DATA RANGE -->
           <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
           <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
           <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
           <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-  </head>
-  <body>
+</head>
+<body>
   <!-- MENU -->
-<div class="menu">
-	<i class="fa fa-bars fa-3x"></i>
-</div>
-
-
+  <div class="menu">
+	  <i class="fa fa-bars fa-3x"></i>
+  </div>
   <!-- PARA DATA RANGE -->
-      <script>
-      $(function() {
+  <script>
+    $(function() {
       $('input[name="daterange"]').daterangepicker({
         opens: 'left'
-      }, function(start, end, label) {
+    },function(start, end, label) {
         console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-      });
-      });
-      </script>
-      <div id="sticky">
-        <div class="wrapper">
-          <nav>
-            <ul><!--LIST ELEMENTS OF THE HEADER-->
-              <li><div class="thread" onclick="window.location='/armario';">Armario</div></li>
-              <li><div class="thread" onclick="window.location.reload()">Sala</div></li>
-              <li><div class="thread" onclick="window.location='/cocina';">Cocina</div></li>
-              <li><div class="thread" onclick="window.location='/altillo';">Altillo</div></li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    <header id="hea">
-      <nav>
-        <ul><!--LIST ELEMENTS OF THE HEADER-->
-          <div class="time"> Última conexión:    <%=time%> %> </div>
-        </ul>
-        <li class="logo"><img src = "../../images/Nimbeo.png" width =80></li>
-
-      </nav>
-  </header>
-
-
-
-
+    });
+  });
+  </script>
+  <% include header%>
 
     <div id="chart4" class="chart">
         <h2>Humedad</h2>
