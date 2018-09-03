@@ -27,9 +27,20 @@ svg {
   background: white;
 }
 .charto{
-  height: 1000px;
+  height: 600px;
+  border: 1px solid #D5D5D5;
+  box-shadow: 5px 2px 2px #F0F0F0;
+  width: 85%;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  margin-left: 13%;
+  background: white;
 }
-
+#menu{
+  cursor: pointer;
+}
 h2{
   margin-left: 15px;
   color: #4D4D4D;

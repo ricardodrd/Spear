@@ -36,7 +36,7 @@ function createGraph (res, req, next){
   var JSDOM = require('jsdom').JSDOM;
 
   var chartWidth = 500,
-      chartHeight = 500;
+      chartHeight = 800;
 
   var arc = d3.arc()
       .outerRadius(chartWidth / 2 - 10)
