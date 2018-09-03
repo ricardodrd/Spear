@@ -17,10 +17,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-
 app.locals.myFunc = function(data){
   console.log("funcion(a)");
-  console.log(data)
+  console.log(data);
+  const d = data;
+  var width = 1000;
+  var height = 450;
+  var margin = 90;
+  var mar2 = 80;
+  var duration = 250;
+
 }
 
 

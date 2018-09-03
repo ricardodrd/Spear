@@ -692,9 +692,7 @@ var yScale_armario  = d3.scaleLinear()
 var nyScale_armario = d3.scaleLinear()
   .domain([0, d3.max(signal_armario[0].values, d => d.value)])
   .range([height-margin, 0]);
-/*
-SALA
-*/
+
 
 
 

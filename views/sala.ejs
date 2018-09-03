@@ -12,6 +12,85 @@
           <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 <body>
+  <div id="toolbar">
+  	<div class="wrapper">
+  		<div class="tool">
+  			<i class="fa fa-cog top fa-2x"></i>
+  			<a href="#" class="title">Menu</a>
+  		</div>
+  				<div class="first">
+  			<ul>
+          <li><!-- ESTADO DE DISPOSITIVOS -->
+            <div class="tool-change-background">
+              <i class="fa fa-plus"></i>
+              <a href="" onclick="return false;" class="new-card">Altillo</a>
+            </div>
+        </li>
+        <li><!-- ESTADO DE DISPOSITIVOS -->
+          <div class="tool-change-background">
+            <i class="fa fa-plus"></i>
+            <a href="" onclick="return false;" class="new-card"> Sala</a>
+          </div>
+      </li>
+      <li><!-- ESTADO DE DISPOSITIVOS -->
+        <div class="tool-change-background">
+          <i class="fa fa-plus"></i>
+          <a href="" onclick="return false;" class="new-card">Armario eléctrico</a>
+        </div>
+    </li>
+    <li><!-- ESTADO DE DISPOSITIVOS -->
+      <div class="tool-change-background">
+        <i class="fa fa-plus"></i>
+        <a href="" onclick="return false;" class="new-card">Cocina</a>
+      </div>
+  </li>
+</ul>
+  <div class="tool">
+    <i class="fa fa-cog top fa-2x"></i>
+    <a href="#" class="title">Configuración</a>
+  </div>
+  <ul>
+  				 <li><!--ELEGIR RANGO DE FECHAS -->
+              <div class="tool-add-image">
+                <i class="fa fa-calendar"></i>
+                <a href="#">Date</a>
+              <input type="text" id="datepicker" name="daterange" value="01/01/2018 - 01/15/2018" />
+              </div>
+  				</li>
+  				<li><!--SLIDER PARA LA EFICIENCIA -->
+              <div class="tool-change-background">
+                <i class="fa fa-recycle"></i>
+                <a href="">Efficiency</a></div><p id="ef"><span id="demo"></span> %</p>
+                <div class="slidecontainer">
+                <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
+              <script>
+              var slider = document.getElementById("myRange");
+              var output = document.getElementById("demo");
+              output.innerHTML = slider.value;
+
+              slider.oninput = function() {
+                output.innerHTML = this.value;
+              }
+              </script>
+              </div>
+  				</li>
+          	<li><!-- ESTADO DE DISPOSITIVOS -->
+              <div class="tool-change-background">
+                <i class="fa fa-plus"></i>
+                <a href="" onclick="return false;" class="new-card">Status</a>
+              </div>
+  				</li>
+            <li><!-- CONSUMO ENERGETICO -->
+              <div class="tool-change-background">
+                <i class="fa fa-battery-half fa-1x"></i>
+                <a href="" onclick="return false;" class="new-card">Energy cosumption</a>
+              </div>
+  				</li>
+
+  			</ul>
+  		</div>
+    </div>
+  </div>
   <!-- MENU -->
   <div class="menu">
 	  <i class="fa fa-bars fa-3x"></i>

@@ -52,16 +52,15 @@ h4{
 
 #toolbar{
   /* float: right !important; */
-  width: 270px;
-  height: 50%;
+  width: 240px;
+  height: 100%;
   background-color: #2F3333;
   display: block;
-  padding-top: 15px;
+  padding-top: 10px;
   transition: .1s;
   box-shadow: 1px 0px 4px #212424;
-  margin-top: 300px;
   position: fixed;
-  right:0;
+left:0;
 }
 #toolbar .wrapper .first{
   width: 100%;
@@ -75,7 +74,16 @@ h4{
   padding-left: 25px;
 } */
 #toolbar .wrapper .first ul{
-  padding: 0px
+  padding: 0px;
+  border-bottom: 1px solid white;
+  border-top: 1px solid white;
+
+}
+.tool{
+  background-color: #2F3333 ;
+  padding-top: 10px;
+  padding-bottom: 20px;
+
 }
 #toolbar .wrapper .first ul li{
   list-style-type: none;
@@ -96,6 +104,7 @@ h4{
 }
 #toolbar .wrapper .title{
   font-size: 25px;
+
 }
 .fa-cog.top{
   padding-left: 10px;
