@@ -11,7 +11,8 @@ router.get('/', queryDB, function (req, res){
     console.log("Connected...");
     res.render('index.ejs',{
         //  news: recordset[0].value;
-        data: res.dbdata
+        data: res.dbdata,
+        time: "..."
     })
     console.log(typeof(res.dbdata));
 

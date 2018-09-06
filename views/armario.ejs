@@ -18,21 +18,55 @@
 	<i class="fa fa-bars fa-3x"></i>
 </div>
 <div id="toolbar">
-	<div class="wrapper">
-		<div class="tool">
-			<i class="fa fa-cog top fa-2x"></i>
-			<a href="#" class="title">Menu</a>
-		</div>
-				<div class="first">
-			<ul>
-				 <li><!--ELEGIR RANGO DE FECHAS -->
+  <div class="wrapper">
+    <div class="tool">
+      <i class="fa fa-cog top fa-2x"></i>
+      <a href="/" class="title">Menu</a>
+    </div>
+        <div class="first">
+      <ul>
+        <li class="menu" onclick="window.location='/altillo';">
+          <div class="tool-change-background">
+            <i class="fa fa-plus"></i>
+            <a  class="new-card">Altillo</a>
+          </div>
+      </li>
+      <li class="menu"  onclick="window.location='/sala';">
+        <div class="tool-change-background">
+          <i class="fa fa-plus"></i>
+          <a  class="new-card"> Sala</a>
+        </div>
+    </li>
+    <li class="menu" id="current" onclick="window.location.reload()">
+      <div class="tool-change-background">
+        <i class="fa fa-plus"></i>
+        <a class="new-card">Armario eléctrico</a>
+      </div>
+  </li >
+  <li class="menu" onclick="window.location='/cocina';">
+    <div class="tool-change-background">
+      <i class="fa fa-plus"></i>
+      <a class="new-card">Cocina</a>
+    </div>
+</li>
+</ul>
+</div>
+<div class="first">
+
+
+<div class="cfg">
+  <i class="fa fa-cog top fa-2x"></i>
+  <a href="#" class="title">Configuración</a>
+</div>
+<ul>
+         <li><!--ELEGIR RANGO DE FECHAS -->
             <div class="tool-add-image">
               <i class="fa fa-calendar"></i>
               <a href="#">Date</a>
             <input type="text" id="datepicker" name="daterange" value="01/01/2018 - 01/15/2018" />
             </div>
-				</li>
-				<li><!--SLIDER PARA LA EFICIENCIA -->
+        </li>
+        <li><!--SLIDER PARA LA EFICIENCIA -->
             <div class="tool-change-background">
               <i class="fa fa-recycle"></i>
               <a href="">Efficiency</a></div><p id="ef"><span id="demo"></span> %</p>
@@ -48,33 +82,22 @@
             }
             </script>
             </div>
-				</li>
-        	<li><!-- ESTADO DE DISPOSITIVOS -->
+        </li>
+          <li><!-- ESTADO DE DISPOSITIVOS -->
             <div class="tool-change-background">
               <i class="fa fa-plus"></i>
               <a href="" onclick="return false;" class="new-card">Status</a>
             </div>
-				</li>
+        </li>
           <li><!-- CONSUMO ENERGETICO -->
             <div class="tool-change-background">
               <i class="fa fa-battery-half fa-1x"></i>
               <a href="" onclick="return false;" class="new-card">Energy cosumption</a>
             </div>
-				</li>
-        <li><!-- ELEGIR AREA -->
-          <div class="tool-change-background">
-            <i class="fa fa-home"></i>
-            <a href="" onclick="return false;" class="new-card">Area</a>
-            <select>
-			<option value="alti">Altillo</option>
-            <option value="sala">Sala</option>
-            <option value="ae">Armario eléctrico</option>
-            <option value="coc">Cocina</option>
-          </select>
-          </div>
-      </li>
-			</ul>
-		</div>
+        </li>
+
+      </ul>
+    </div>
   </div>
 </div>
 
@@ -89,20 +112,7 @@
       });
       </script>
 
-            <div id="sticky">
-              <div class="wrapper">
-                <nav>
-                  <ul>
-                    <img src = "../../images/home-icon.png" width =60 onclick="window.location='/';">
 
-                    <li class="this" onclick="window.location.reload()"><div class="thread" >Armario</div></li>
-                    <li onclick="window.location='/sala';"><div class="thread">Sala</div></li>
-                    <li onclick="window.location='/cocina';"><div class="thread">Cocina</div></li>
-                    <li onclick="window.location='/altillo';"><div class="thread">Altillo</div></li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
             <header id="hea">
               <nav>
                 <ul>

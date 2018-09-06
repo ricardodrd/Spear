@@ -38,8 +38,11 @@ svg {
   margin-left: 13%;
   background: white;
 }
-#menu{
+.menu{
   cursor: pointer;
+}
+#current{
+  background-color: #363B3B;
 }
 h2{
   margin-left: 15px;
@@ -71,25 +74,19 @@ h4{
   display: block;
   padding-top: 10px;
   transition: .1s;
-  box-shadow: 1px 0px 4px #212424;
+  box-shadow: 1px 1px 1px gray;
   position: fixed;
 left:0;
 }
 #toolbar .wrapper .first{
   width: 100%;
   background-color: #3F4545;
-  padding-bottom: 0px;
-  margin: 0;
 }
-/* #toolbar .wrapper  h2{
-	color: #FDFCEC;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 100;
-  padding-left: 25px;
-} */
+
 #toolbar .wrapper .first ul{
   padding: 0px;
-
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
 }
 .tool{
   background-color: #2F3333 ;
@@ -259,7 +256,7 @@ img{
 
 
 header {
-	background:linear-gradient(60deg,#3F4545,#5A6161,#777B7B ,#8E9292,#A3AAAA);
+	background:#D8D8D8;
 
   color:white;
   padding-left:0px;

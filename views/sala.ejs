@@ -16,38 +16,39 @@
   	<div class="wrapper">
   		<div class="tool">
   			<i class="fa fa-cog top fa-2x"></i>
-  			<a href="#" class="title">Menu</a>
+  			<a href="/" class="title">Menu</a>
   		</div>
   				<div class="first">
   			<ul>
-          <li id="menu"><!-- ESTADO DE DISPOSITIVOS -->
+          <li class="menu" onclick="window.location='/altillo';">
             <div class="tool-change-background">
               <i class="fa fa-plus"></i>
-              <a href="" onclick="return false;" class="new-card">Altillo</a>
+              <a  class="new-card">Altillo</a>
             </div>
         </li>
-        <li id="menu"><!-- ESTADO DE DISPOSITIVOS -->
+        <li class="menu" id="current" onclick="window.location.reload()">
           <div class="tool-change-background">
             <i class="fa fa-plus"></i>
-            <a href="" onclick="return false;" class="new-card"> Sala</a>
+            <a  class="new-card"> Sala</a>
           </div>
       </li>
-      <li id="menu"><!-- ESTADO DE DISPOSITIVOS -->
+      <li class="menu" onclick="window.location='/armario';">
         <div class="tool-change-background">
           <i class="fa fa-plus"></i>
-          <a href="" onclick="return false;" class="new-card">Armario eléctrico</a>
+          <a class="new-card">Armario eléctrico</a>
         </div>
     </li >
-    <li id="menu"><!-- ESTADO DE DISPOSITIVOS -->
+    <li class="menu" onclick="window.location='/cocina';">
       <div class="tool-change-background">
         <i class="fa fa-plus"></i>
-        <a href="" onclick="return false;" class="new-card">Cocina</a>
+        <a class="new-card">Cocina</a>
       </div>
   </li>
+  </ul>
 </div>
   <div class="first">
 
-</ul>
+
   <div class="cfg">
     <i class="fa fa-cog top fa-2x"></i>
     <a href="#" class="title">Configuración</a>
@@ -94,10 +95,7 @@
   		</div>
     </div>
   </div>
-  <!-- MENU -->
-  <div class="menu">
-	  <i class="fa fa-bars fa-3x"></i>
-  </div>
+
   <!-- PARA DATA RANGE -->
   <script>
     $(function() {
@@ -118,10 +116,10 @@
     </div>
     <div id="chart6" class="chart">
         <h2>Temperatura</h2></div>
-    <div id="chart7" class="chart"></div>
-  <div id="chartpost" class = "charto" ><% include test%>
-
+  <div id="chartpost" class = "charto" >
+    <% include test%>
 </div>
+
 
   <script>
 

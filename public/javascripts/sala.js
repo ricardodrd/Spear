@@ -41,6 +41,7 @@ var wh_sala_agua =[
       { date: "6", value: "48"},
       { date: "7", value: "51" },
       { date: "8", value: "49" },
+      { date: "8.6", value: "45" },
       { date: "9", value: "53" },
       { date: "10", value: "54"},
       { date: "11", value: "53" },

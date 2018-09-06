@@ -17,13 +17,15 @@ html, body {
 }
 /*tamaño del plano*/
 #plan {
-  margin: 25px 35%;
-  width: 400px;
+  margin-left: 40%;
+  width: 500px;
+  margin-top: 10%;
+  height: 500px;
 }
 
 .room {
   position: relative;
-  border: black 5px solid;
+  border: #3B3B3B 5px solid;
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
@@ -44,7 +46,7 @@ html, body {
 	margin-right: auto;
   font-weight: bold;
   font-size: 1.2em;
-  color: #1658f4;
+  color: #0E387A;
 }
 /*señalizacion de la entrada*/
 .start {
@@ -53,9 +55,9 @@ html, body {
   left: -20px;
 	width: 0;
 	height: 0;
-	border-top: 10px solid transparent;
-	border-bottom: 10px solid transparent;
-	border-left: 10px solid #ad1A06;
+	border-top: 8px solid transparent;
+	border-bottom: 8px solid transparent;
+	border-left: 18px solid #ad1A06;
 }
 
 
@@ -98,7 +100,6 @@ div[class^="room"]:nth-child(2):after {
   border-radius: 0 27px 0  0;
 }
 div[class^="room"]:nth-child(2):hover {
-background-color: #CC99FF;
 }
 /*COCINA*/
 div[class^="room"]:nth-child(3) {

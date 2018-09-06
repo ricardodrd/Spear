@@ -265,13 +265,14 @@ var parseDate1 = d3.timeParse("%d")
 
 var parseDate = d3.timeParse("%H");
 
-
+console.log(wh);
 
 wh.forEach(function(d) {
   d.values.forEach(function(d) {
     d.date = parseDate(d.date);
   });
 });
+console.log(wh);
 signal.forEach(function(d) {
   d.values.forEach(function(d) {
     d.date = parseDate(d.date);
