@@ -1,7 +1,7 @@
 'use strict'
 //var dbpool = require("../server/mysqlLib.js");
 var express = require('express');
-var router = express.Router();
+var router = express.Router({mergeParams:true});
 var knex = require("../server/dbConnection.js");
 var JSDOM = require('jsdom').JSDOM;
 var fs = require('fs');
@@ -10,22 +10,56 @@ var d3 = require('d3');
 
 
 /*Home page*/
-router.get('/', queryDB,createGraph, render);
+router.get('/', queryAire1, queryhumedad, createGraph, render);
 
-function queryDB(res, req, next){
+
+
+router.get('/iluminacion',queryAire1, queryIluminacion);
+
+
+router.get('/temperatura',function(req,res,next){
+  console.log("hola");
+});
+
+
+function queryhumedad(res, req, next){
   const sensorid = 'c4adf0d8-fba2-4586-89ab-0bdf38301fe5'
+  knex.raw(`SELECT TO_CHAR(date,'HH24:MI:SS') as date,value from mediciones where sensorid='${sensorid}' AND TO_CHAR(date,'yyyy-mm-dd')= '2018-09-03'`).then((resultset)=>{
+    console.log("querying humedad");
+    req.dbdata = resultset.rows[0];
+    next();
+  })
+};
+
+function queryAire1 (res, req, next){
+  const sensorid = '58b43d93-0ef2-4715-98e9-ce17ca5340dd';
+  knex.raw(`SELECT TO_CHAR(date,'HH24:MI:SS') as date,value from mediciones where sensorid='${sensorid}' AND TO_CHAR(date,'yyyy-mm-dd')= '2018-09-03'`).then((resultset)=>{
+    console.log("querying information");
+    req.dbdata1 = resultset.rows;
+    console.log(req.dbdata1);
+    next();
+  })
+};
+function queryIluminacion(req, res, next){
+  console.log(req.dbdata1);
+
+  const sensorid = 'aee078b0-bf3a-4161-b661-3481f67feac0'
   knex.raw(`SELECT TO_CHAR(date,'HH24:MI:SS') as date,value from mediciones where sensorid='${sensorid}' AND TO_CHAR(date,'yyyy-mm-dd')= '2018-09-03'`).then((resultset)=>{
     console.log("querying information");
     req.dbdata = resultset.rows;
-    next();
+    console.log(req.dbdata);
   })
 }
+
+
 //ejs needs to be fetched before using D3 json
 
 function createGraph (res, req, next){
   console.log("here")
   const data = req.dbdata;
+  const data1 = req.dbdata1;
   console.log(data);
+  console.log(data1);
 
   // const si = Object.keys(data).length;
   // console.log(data[0].date);
@@ -64,7 +98,11 @@ var forma = d3.timeFormat("%H:%M:%S");
 for (var index in data){
   data[index].date = parset(data[index].date);
 }
-  var chartWidth = 500,
+for (var index1 in data1){
+  data1[index1].date = parset(data1[index1].date);
+}
+console.log(data1);
+  var chartWidth = 700,
       chartHeight = 800;
 
 
@@ -76,38 +114,19 @@ for (var index in data){
   var yScale = d3.scaleLinear()
     .domain([0, d3.max(data, d => d.value )])
     .range([height-margin, 0]);
+  var nyScale =  d3.scaleLinear()
+    .domain([0, d3.max(data1, d => d.value)])
+    .range([height-margin, 0]);
 
   var color = d3.scaleOrdinal(d3.schemeCategory10);
   var xAxis = d3.axisBottom(xScale).ticks(24);
-  var yAxis = d3.axisLeft(yScale).ticks(25);
+  var yAxis = d3.axisLeft(yScale).ticks(10);
+  var nyAxis = d3.axisRight(nyScale).ticks(15);
 
 
-/*-----------------------------------------------------
-            PIE CHART
----------------------------------------------------
-
-  //
-  // var arc = d3.arc()
-  //     .outerRadius(chartWidth / 2 - 10)
-  //     .innerRadius(0);
- //  var colours = ['#F00', '#000', '#000', '#000', '#000', '#000', '#000', '#000', '#000'];
- // const pieData = [12,31];
-
- //
- // svg.selectAll('.arc')
- //     .data(d3.pie()(pieData))
- //     .enter()
- //     .append('path')
- //     .attr('class', 'arc')
- //     .attr('d', arc)
- //     .attr('fill', function(d, i) {
- //             return colours[i];
- //         })
- //     .attr('stroke', '#fff');
 
 
-/*
-----------------------------------------------------------*/
+
 
  const outputLocation = './views/test.ejs';
       const window = (new JSDOM(`
@@ -120,121 +139,222 @@ for (var index in data){
       window.d3 = d3.select(window.document); //get d3 into the dom
 
 
-      // //do yr normal d3 stuff
-      var svg = window.d3.select('body')
-        .append('div').attr('class', 'container') //make a container div to ease the saving process
-        .append('svg')
-        .attr('xmlns', 'http://www.w3.org/2000/svg')
-        .attr('width', 'chartWidth')
-        .attr('height', 'chartHeight')
-        .append('g')
-        .attr('transform', 'translate(' + chartWidth / 8 + ',' + chartWidth / 4 + ')');
-        let lines = svg.append('g')
-            .attr('class', 'lines');
-        let line = d3.line()
-            .x(d=> xScale(d.date))
-            .y(d => yScale(d.value));
-            console.log("sssss");
-            console.log(data);
-            lines.selectAll('.line-group')
-              .data(data).enter()
-              .append('g')
-              .attr('class', 'line-group')
-              .on("mouseover", function(d, i) {
-                  svg.append("text")
-                    .attr("class", "title-text")
-                    .style("fill", color(i))
-                    .text(d.name)
-                    .attr("text-anchor", "middle")
-                    .attr("x", (width-margin)/2)
-                    .attr("y", -15);
-              })
-              .on("mouseout", function(d) {
-                  svg.select(".title-text").remove();
-              })
-              .append('path')
-              .attr('class', 'line')
-              .attr('d', line(data))
-              .style('stroke', (d, i) => color(i))
-              .style('opacity', lineOpacity)
-              .style("stroke-width", lineStroke)
-              .on("mouseover", function(d) {
-                  d3.selectAll('.line')
-            					.style('opacity', otherLinesOpacityHover);
-                  d3.selectAll('.circle')
-            					.style('opacity', circleOpacityOnLineHover);
-                  d3.select(this)
-                    .style('opacity', lineOpacityHover)
-                    .style("stroke-width", lineStrokeHover)
-                    .style("cursor", "pointer");
-                })
-              .on("mouseout", function(d) {
-                  d3.selectAll(".line")
-            					.style('opacity', lineOpacity);
-                  d3.selectAll('.circle')
-            					.style('opacity', circleOpacity);
-                  d3.select(this)
-                    .style("stroke-width", lineStroke)
-                    .style("cursor", "none");
-              });
-            lines.selectAll("circle-group")
-              .data(data).enter()
-              .append("g")
-              .style("fill", (d, i) => color(i))
-              .selectAll("circle")
-              .data(data,d => d.value).enter()
-              .append("g")
-              .attr("class", "circle")
-              .on("mouseover", function(d) {
-                  d3.select(this)
-                    .style("cursor", "pointer")
-                    .append("text")
-                    .attr("class", "text")
-                    .text(`${d.value}`)
-                    .attr("x", xScale(d.date) + 5)
-                    .attr("y", yScale(d.value) - 10);
-                })
-              .on("mouseout", function(d) {
-                  d3.select(this)
-                    .style("cursor", "none")
-                    .transition()
-                    .duration(duration)
-                    .selectAll(".text").remove();
-                })
-              .append("circle")
-              .attr("cx",data => xScale(data.date))
-              .attr("cy",data=> yScale(data.value))
-              .attr("r", circleRadius)
-              .style('opacity', circleOpacity)
-              .on("mouseover", function(d) {
-                    d3.select(this)
-                      .transition()
-                      .duration(duration)
-                      .attr("r", circleRadiusHover);
-                  })
-                .on("mouseout", function(d) {
-                    d3.select(this)
-                      .transition()
-                      .duration(duration)
-                      .attr("r", circleRadius);
-            });
+var svg = window.d3.select('body')
+  .append('div').attr('class', 'container') //make a container div to ease the saving process
+  .append('svg')
+  .attr('xmlns', 'http://www.w3.org/2000/svg')
+  .attr('width', 'chartWidth')
+  .attr('height', 'chartHeight')
+  .append('g')
+  .attr('transform', 'translate(' + width / 20 + ',' + chartWidth / 15 + ')');
+
+let lines = svg.append('g')
+    .attr('class', 'lines');
+    let lines1 = svg.append('g')
+        .attr('class', 'lines');
+
+let line = d3.line()
+  .x(d=> xScale(d.date))
+  .y(d => yScale(d.value))
+  .curve(d3.curveMonotoneX);
+let line2 = d3.line()
+  .x(d=>xScale(d.date))
+  .y(d => nyScale(d.value));
 
 
 
 
-      svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", `translate(0, ${height-margin})`)
-        .call(xAxis);
-      svg.append("g")
-        .attr("class", "y axis")
-        .call(yAxis)
-        .append('text')
-        .attr("y", 15)
-        .attr("x",20)
-        .attr("fill", "#000")
-        .text("Wh")
-        .attr("transform","translate(-15,-20)")
+/*
+---------------------------------------------------
+GROUP 2
+---------------------------------------------------
+*/
+lines.selectAll('.line')
+  .data(data1).enter()
+  .append('g')
+  .attr('class', 'line')
+  .append('path')
+  .attr('class', 'line28')
+  .attr('d', line2(data1))
+  .style('stroke',  i => color(i+3))
+  .style('opacity', 0.5)
+  .style("stroke-width", 1.5)
+;
+
+/*
+---------------------------------------------------
+                  GROUP 1 lines
+---------------------------------------------------
+*/
+
+
+/*Humedad*/
+lines.selectAll('.line-group')
+  .data(data).enter()
+  .append('g')
+  .attr('class', 'line-group')
+  .on("mouseover", function(d, i) {
+      svg.append("text")
+        .attr("class", "title-text")
+        .style("fill", color(i))
+        .text(d.name)
+        .attr("text-anchor", "middle")
+        .attr("x", (width-margin)/2)
+        .attr("y", -15);
+  })
+  .on("mouseout", function(d) {
+      svg.select(".title-text").remove();
+  })
+  .append('path')
+  .attr('class', 'line')
+  .attr('d', line(data))
+  .style('stroke',  i => color(i))
+  .style('opacity', lineOpacity)
+  .style("stroke-width", 2)
+  .on("mouseover", function(d) {
+      d3.selectAll('.line')
+					.style('opacity', otherLinesOpacityHover);
+      d3.selectAll('.circle')
+					.style('opacity', circleOpacityOnLineHover);
+      d3.select(this)
+        .style('opacity', lineOpacityHover)
+        .style("stroke-width", lineStrokeHover)
+        .style("cursor", "pointer");
+    })
+  .on("mouseout", function(d) {
+      d3.selectAll(".line")
+					.style('opacity', lineOpacity);
+      d3.selectAll('.circle')
+					.style('opacity', circleOpacity);
+      d3.select(this)
+        .style("stroke-width", lineStroke)
+        .style("cursor", "none");
+  });
+
+/*
+----------------------------------------------------
+                  Circles
+----------------------------------------------------
+*/
+
+
+
+/*Humedad*/
+lines.selectAll("circle-group")
+  .data(data).enter()
+  .append("g")
+  .style("fill", i => color(i+3))
+  .selectAll("circle")
+  .data(data,d => d.value).enter()
+  .append("g")
+  .attr("class", "circle")
+  .on("mouseover", function(d) {
+      d3.select(this)
+        .style("cursor", "pointer")
+        .append("text")
+        .attr("class", "text")
+        .text(`hello`)
+        .attr("x", xScale(d.date) + 5)
+        .attr("y", yScale(d.value) - 10);
+    })
+  .on("mouseout", function(d) {
+      d3.select(this)
+        .style("cursor", "none")
+        .transition()
+        .duration(duration)
+        .selectAll(".text").remove();
+    })
+  .append("circle")
+  .attr("cx",data => xScale(data.date))
+  .attr("cy",data=> yScale(data.value))
+  .attr("r", 2)
+  .style('opacity', circleOpacity)
+  .on("mouseover", function(d) {
+        d3.select(this)
+          .transition()
+          .duration(duration)
+          .attr("r", circleRadiusHover);
+      })
+    .on("mouseout", function(d) {
+        d3.select(this)
+          .transition()
+          .duration(duration)
+          .attr("r", circleRadius);
+});
+
+
+
+
+lines.selectAll("circle-group")
+  .data(data1).enter()
+  .append("g")
+  .style("fill", i => color(i+1))
+  .selectAll("circle")
+  .data(data1,d => d.value).enter()
+  .append("g")
+  .attr("class", "circle")
+  .on("mouseover", function(d) {
+      d3.select(this)
+        .style("cursor", "pointer")
+        .append("text")
+        .attr("class", "text")
+        .text(`hello`)
+        .attr("x", xScale(d.date) + 5)
+        .attr("y", nyScale(d.value) - 10);
+    })
+  .on("mouseout", function(d) {
+      d3.select(this)
+        .style("cursor", "none")
+        .transition()
+        .duration(duration)
+        .selectAll(".text").remove();
+    })
+  .append("circle")
+  .attr("cx",data1=> xScale(data1.date))
+  .attr("cy",data1=> nyScale(data1.value))
+  .attr("r", 1)
+  .style('opacity', circleOpacity)
+  .on("mouseover", function(d) {
+        d3.select(this)
+          .transition()
+          .duration(duration)
+          .attr("r", circleRadiusHover);
+      })
+    .on("mouseout", function(d) {
+        d3.select(this)
+          .transition()
+          .duration(duration)
+          .attr("r", circleRadius);
+});
+
+/*
+--------------------------------------------------------
+                      AXIS
+--------------------------------------------------------
+*/
+
+svg.append("g")
+  .attr("class", "x axis")
+  .attr("transform", `translate(0, ${height-margin})`)
+  .call(xAxis);
+svg.append("g")
+  .attr("class", "y axis")
+  .call(yAxis)
+  .append('text')
+  .attr("y", 15)
+  .attr("x",20)
+  .attr("fill", "#000")
+  .text("%")
+  .attr("transform","translate(-15,-20)")
+svg.append("g")
+    .attr("class", "y axis")
+    .attr("transform","translate("+axistransform1+",0)")
+    .call(nyAxis)
+    .append('text')
+    .attr("y", 15)
+    .attr("fill", "green")
+    .text("Wh")
+    .attr("transform","translate(-15,-25)");
 
 
       /* ALTILLO SVG */
@@ -243,6 +363,12 @@ for (var index in data){
       fs.writeFileSync(outputLocation, window.d3.select('.container').html()) //using sync to keep the code simple
 next();
   }
+
+
+
+
+
+
   function render(req, res){
       //dbpool.query(recordset, function(err,recordset){
       const d = new Date();

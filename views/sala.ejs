@@ -107,20 +107,26 @@
   });
   </script>
   <% include header%>
-
-    <div id="chart4" class="chart">
+<!-- 
+   <div id="chart4" class="chart">
         <h2>Humedad</h2>
     </div>
     <div id="chart5" class="chart">
         <h2>Iluminación</h2>
     </div>
     <div id="chart6" class="chart">
-        <h2>Temperatura</h2></div>
+        <h2>Temperatura</h2></div> -->
   <div id="chartpost" class = "charto" >
+    <h2>Humedad</h2>
+
     <% include test%>
+
 </div>
-
-
+<div id = "myselect">
+<button> Humedad </button>
+<button onclick="window.location='/sala/iluminacion';"> Iluminación </button>
+<button onclick="window.location='/sala/temperatura';"> Temperatura </button>
+</div>
   <script>
 
   </script>
