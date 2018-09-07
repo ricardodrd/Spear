@@ -9,24 +9,24 @@ var d3 = require('d3');
 
 
 
-/*Home page*/
 router.get('/', queryAire1, queryhumedad, createGraph, render);
 
 
 
-router.get('/iluminacion',queryAire1, queryIluminacion);
+router.get('/iluminacion',queryAire1, queryIluminacion, createGraph, render);
 
 
-router.get('/temperatura',function(req,res,next){
-  console.log("hola");
-});
+// router.get('/temperatura',function(req,res,next){
+//   console.log("hola");
+// });
 
 
 function queryhumedad(res, req, next){
-  const sensorid = 'c4adf0d8-fba2-4586-89ab-0bdf38301fe5'
+  const sensorid = 'c4adf0d8-fba2-4586-89ab-0bdf38301fe5';
+  console.log("made it the other way");
   knex.raw(`SELECT TO_CHAR(date,'HH24:MI:SS') as date,value from mediciones where sensorid='${sensorid}' AND TO_CHAR(date,'yyyy-mm-dd')= '2018-09-03'`).then((resultset)=>{
     console.log("querying humedad");
-    req.dbdata = resultset.rows[0];
+    req.dbdata = resultset.rows;
     next();
   })
 };
@@ -34,31 +34,46 @@ function queryhumedad(res, req, next){
 function queryAire1 (res, req, next){
   const sensorid = '58b43d93-0ef2-4715-98e9-ce17ca5340dd';
   knex.raw(`SELECT TO_CHAR(date,'HH24:MI:SS') as date,value from mediciones where sensorid='${sensorid}' AND TO_CHAR(date,'yyyy-mm-dd')= '2018-09-03'`).then((resultset)=>{
-    console.log("querying information");
+    console.log("querying Aire");
     req.dbdata1 = resultset.rows;
     console.log(req.dbdata1);
     next();
   })
 };
 function queryIluminacion(req, res, next){
-  console.log(req.dbdata1);
-
-  const sensorid = 'aee078b0-bf3a-4161-b661-3481f67feac0'
+  const sensorid = 'aee078b0-bf3a-4161-b661-3481f67feac0';
+console.log("made it the other way");
   knex.raw(`SELECT TO_CHAR(date,'HH24:MI:SS') as date,value from mediciones where sensorid='${sensorid}' AND TO_CHAR(date,'yyyy-mm-dd')= '2018-09-03'`).then((resultset)=>{
-    console.log("querying information");
-    req.dbdata = resultset.rows;
-    console.log(req.dbdata);
+    console.log("querying iluminacion");
+    res.dbdata = resultset.rows;
+    next();
   })
+}
+function testing(res, req, next){
+  console.log("hellooooooooooooooooooooooooooo");
+  if(!req.dbdata){
+    console.log("res");
+  }
+  else{
+    console.log("req");
+  }
+  if(!req.dbdata1){
+    console.log("res1");
+  }
+  else{
+    console.log("req1");
+  }
+
 }
 
 
 //ejs needs to be fetched before using D3 json
 
 function createGraph (res, req, next){
-  console.log("here")
-  const data = req.dbdata;
-  const data1 = req.dbdata1;
-  console.log(data);
+const data = req.dbdata;
+const data1 = req.dbdata1;
+//req not constant
+
   console.log(data1);
 
   // const si = Object.keys(data).length;
@@ -91,9 +106,7 @@ function createGraph (res, req, next){
 -----------------------------------------------*/
 var parset = d3.timeParse("%H:%M:%S");
 var d = parset("00:00:01");
-
 var n = parset("23:59:59");
-var forma = d3.timeFormat("%H:%M:%S");
 
 for (var index in data){
   data[index].date = parset(data[index].date);
@@ -101,34 +114,32 @@ for (var index in data){
 for (var index1 in data1){
   data1[index1].date = parset(data1[index1].date);
 }
-console.log(data1);
-  var chartWidth = 700,
-      chartHeight = 800;
-
-
-
-
-  var xScale = d3.scaleTime()
-    .domain([d,n])
-    .range([0, width-margin]);
-  var yScale = d3.scaleLinear()
-    .domain([0, d3.max(data, d => d.value )])
-    .range([height-margin, 0]);
-  var nyScale =  d3.scaleLinear()
-    .domain([0, d3.max(data1, d => d.value)])
-    .range([height-margin, 0]);
-
-  var color = d3.scaleOrdinal(d3.schemeCategory10);
-  var xAxis = d3.axisBottom(xScale).ticks(24);
-  var yAxis = d3.axisLeft(yScale).ticks(10);
-  var nyAxis = d3.axisRight(nyScale).ticks(15);
 
 
 
 
 
+var xScale = d3.scaleTime()
+  .domain([d,n])
+  .range([0, width-margin]);
+var yScale = d3.scaleLinear()
+  .domain([0, d3.max(data, d => d.value )])
+  .range([height-margin, 0]);
+var nyScale =  d3.scaleLinear()
+  .domain([0, d3.max(data1, d => d.value)])
+  .range([height-margin, 0]);
 
- const outputLocation = './views/test.ejs';
+var color = d3.scaleOrdinal(d3.schemeCategory10);
+var xAxis = d3.axisBottom(xScale).ticks(24);
+var yAxis = d3.axisLeft(yScale).ticks(10);
+var nyAxis = d3.axisRight(nyScale).ticks(15);
+
+
+
+
+
+
+ const outputLocation = './views/jsdomsala.ejs';
       const window = (new JSDOM(`
         <html>
         <head>
@@ -143,15 +154,14 @@ var svg = window.d3.select('body')
   .append('div').attr('class', 'container') //make a container div to ease the saving process
   .append('svg')
   .attr('xmlns', 'http://www.w3.org/2000/svg')
-  .attr('width', 'chartWidth')
-  .attr('height', 'chartHeight')
+  .attr('width', width)
+  .attr('height', height)
   .append('g')
-  .attr('transform', 'translate(' + width / 20 + ',' + chartWidth / 15 + ')');
+  .attr('transform', 'translate(' + width / 20 + ',' + height / 15 + ')');
 
 let lines = svg.append('g')
     .attr('class', 'lines');
-    let lines1 = svg.append('g')
-        .attr('class', 'lines');
+
 
 let line = d3.line()
   .x(d=> xScale(d.date))
@@ -178,8 +188,7 @@ lines.selectAll('.line')
   .attr('d', line2(data1))
   .style('stroke',  i => color(i+3))
   .style('opacity', 0.5)
-  .style("stroke-width", 1.5)
-;
+  .style("stroke-width", 1.5);
 
 /*
 ---------------------------------------------------
@@ -363,9 +372,6 @@ svg.append("g")
       fs.writeFileSync(outputLocation, window.d3.select('.container').html()) //using sync to keep the code simple
 next();
   }
-
-
-
 
 
 
