@@ -70,7 +70,7 @@ h4{
   /* float: right !important; */
   width: 12%;
   height: 100%;
-  background-color: #2F3333;
+  background-color: #2A2A2A;
   display: block;
   padding-top: 10px;
   transition: .1s;
@@ -89,7 +89,7 @@ left:0;
   border-bottom: 1px solid gray;
 }
 .tool{
-  background-color: #2F3333 ;
+  background-color: #2A2A2A ;
   padding-top: 10px;
   padding-bottom: 10px;
 
@@ -97,7 +97,7 @@ left:0;
 .cfg{
   padding-top: 50px;
   padding-bottom: 10px;
-  background-color: #2F3333 ;
+  background-color: #2A2A2A ;
 
 }
 #toolbar .wrapper .first ul li{
@@ -113,7 +113,7 @@ left:0;
 }
 #toolbar .wrapper a{
   font-weight: 100;
-  color: #FDFCEC ;
+  color: white ;
   text-decoration: none;
   display: inline-block;
 }

@@ -32,7 +32,12 @@ var routes = require('./routes/index.js');
 app.use('/', routes);
 // app.use('/users', users);
 app.use('/cocina', cocina);
-app.use('/sala', sala);
+app.use('/sala',function(req, res, next){
+  console.log(req.originalUrl); // '/admin/new'
+console.log(req.baseUrl); // '/admin'
+console.log(req.path); // '/new'
+next();
+}, sala);
 app.use('/altillo', altillo);
 app.use('/armario', armario);
 
